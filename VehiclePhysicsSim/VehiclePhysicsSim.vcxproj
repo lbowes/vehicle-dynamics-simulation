@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CAB52AAC-D9D8-4D94-BB5B-3920F3E99CB3}</ProjectGuid>
+    <RootNamespace>VehiclePhysicsSim</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>C:\Users\User\Documents\School\A-Level\Computer Science\NEA - Home copy\deps\Libs;\\crgs-server-ys1\s16050\Work\Computer Science\Dependencies\Libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\User\Documents\School\A-Level\Computer Science\NEA - Home copy\deps\Includes;\\crgs-server-ys1\s16050\Work\Computer Science\Dependencies\Includes;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>C:\Users\User\Documents\School\A-Level\Computer Science\NEA - Home copy\deps\Libs;\\crgs-server-ys1\s16050\Work\Computer Science\Dependencies\Libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\User\Documents\School\A-Level\Computer Science\NEA - Home copy\deps\Includes;\\crgs-server-ys1\s16050\Work\Computer Science\Dependencies\Includes;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;SOIL.lib;Framework.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;SOIL.lib;Framework.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\AllCameras.cpp" />
+    <ClCompile Include="src\CameraSystem.cpp" />
+    <ClCompile Include="src\ICarModel.cpp" />
+    <ClCompile Include="src\ControlSystem.cpp" />
+    <ClCompile Include="src\DebugCarModel.cpp" />
+    <ClCompile Include="src\DebugVectorGroup.cpp" />
+    <ClCompile Include="src\Environment.cpp" />
+    <ClCompile Include="src\GameCarModel.cpp" />
+    <ClCompile Include="src\Car.cpp" />
+    <ClCompile Include="src\EnvironmentModel.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\PacejkaMagicFormula.cpp" />
+    <ClCompile Include="src\Terrain.cpp" />
+    <ClCompile Include="src\TerrainModel.cpp" />
+    <ClCompile Include="src\Track.cpp" />
+    <ClCompile Include="src\Tyre.cpp" />
+    <ClCompile Include="src\UILayer.cpp" />
+    <ClCompile Include="src\VehicleSimulation.cpp" />
+    <ClCompile Include="src\VisualShell.cpp" />
+    <ClCompile Include="src\Wheel.cpp" />
+    <ClCompile Include="src\WheelInterface.cpp" />
+    <ClCompile Include="src\WheelSystem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\AllCameras.h" />
+    <ClInclude Include="src\Brake.hpp" />
+    <ClInclude Include="src\CameraSystem.h" />
+    <ClInclude Include="src\ICarModel.h" />
+    <ClInclude Include="src\Axle.hpp" />
+    <ClInclude Include="src\ControlSystem.h" />
+    <ClInclude Include="src\DebugCarModel.h" />
+    <ClInclude Include="src\DebugVector.hpp" />
+    <ClInclude Include="src\DebugVectorGroup.h" />
+    <ClInclude Include="src\Environment.h" />
+    <ClInclude Include="src\GameCarModel.h" />
+    <ClInclude Include="src\Car.h" />
+    <ClInclude Include="src\EnvironmentModel.h" />
+    <ClInclude Include="src\PacejkaMagicFormula.h" />
+    <ClInclude Include="src\Suspension.hpp" />
+    <ClInclude Include="src\Terrain.h" />
+    <ClInclude Include="src\TerrainGenLayers.hpp" />
+    <ClInclude Include="src\TerrainModel.h" />
+    <ClInclude Include="src\TorqueGenerator.hpp" />
+    <ClInclude Include="src\Track.h" />
+    <ClInclude Include="src\Tyre.h" />
+    <ClInclude Include="src\UILayer.h" />
+    <ClInclude Include="src\VehicleSimulation.h" />
+    <ClInclude Include="src\VisualShell.h" />
+    <ClInclude Include="src\Wheel.h" />
+    <ClInclude Include="src\WheelInterface.h" />
+    <ClInclude Include="src\WheelSystem.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="notes.txt" />
+    <Text Include="todo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\body.frag" />
+    <None Include="res\shaders\body.vert" />
+    <None Include="res\shaders\debug.frag" />
+    <None Include="res\shaders\debug.vert" />
+    <None Include="res\shaders\flat.frag" />
+    <None Include="res\shaders\flat.vert" />
+    <None Include="res\shaders\plane.frag" />
+    <None Include="res\shaders\plane.vert" />
+    <None Include="res\shaders\skyBox.frag" />
+    <None Include="res\shaders\skyBox.vert" />
+    <None Include="res\shaders\terrain.frag" />
+    <None Include="res\shaders\terrain.vert" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

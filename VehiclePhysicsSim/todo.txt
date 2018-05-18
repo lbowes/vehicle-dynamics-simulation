@@ -1,0 +1,27 @@
+---TODO---
+----------CURRENTLY WORKING ON----------
+* Fix the cars position forcing when it goes over a ramp
+----------------------------------------
+
+
+* Look into variable surface types returning variable coefficients of friction on the terrain.
+
+-------------------------------------------------------------------------------------------------------------------
+* 'Integrate' the car model into the foggy, variably-lit environment. Pass the sun direction and fog params
+  to the car's shader so that it also disappears into the fog with the terrain etc
+
+* Using the FLAT_PLANE in the EnvironmentModel, look at why updating the data in an IndexBuffer causes problems.
+  See line 334 of DebugCarModel. This section simply tries to update the data in the car's base index buffer (it
+  just copies the existing indices and so doesn't really even update anything) and for some reason, the index buffer
+  of the FLAT_PLANE in the EnvironmentModel is affected! Why is this happening?
+-------------------------------------------------------------------------------------------------------------------
+* More in depth wheel/tire physics (if time permits)
+  - Rolling radius vs loaded radius
+    https://www.tut.fi/ms/muo/vert/11_tyre_as_car_component/handling_input_rolling_radius.htm
+  
+  - Self aligning torque
+    https://en.wikipedia.org/wiki/Self_aligning_torque
+	caused by pneumatic trail
+	https://en.wikipedia.org/wiki/Pneumatic_trail
+
+-------------------------------------------------------------------------------------------------------------------
