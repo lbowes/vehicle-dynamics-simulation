@@ -8,9 +8,6 @@ Non-exam assessment project for AQA A level computer science, developed between 
 ### The Non-Exam Assessment
 This project counts for 20% of the final A level result. Details on the requirements for the NEA can be found [here](http://filestore.aqa.org.uk/resources/computing/AQA-7517-NEA-GUIDE.PDF).
 
-### Results
-72/75 - 96% - A*
-
 ### License
 [MIT License](https://github.com/lbowes/A-Level-Computer-Science-NEA/blob/master/LICENSE)
 
