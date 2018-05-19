@@ -14,4 +14,6 @@ This project counts for 20% of the final A level result. Details on the requirem
 ### License
 [MIT License](https://github.com/lbowes/A-Level-Computer-Science-NEA/blob/master/LICENSE)
 
+---
+
 ![](VehiclePhysicsSim/screenshots/screenshot.png)
