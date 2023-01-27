@@ -61,7 +61,7 @@ namespace External {
 					//Reset the total
 					total = 0.0;
 
-					//Add low frequency hills 
+					//Add low frequency hills
 					amplitude = 8.0;
 					frequency = 0.1;
 					total += -abs(Framework::Maths::Noise::octavePerlin(perlinCorrectX * frequency, perlinCorrectZ * frequency, 3.0, 1.1) * amplitude);

@@ -40,14 +40,14 @@ namespace Internal {
 		PacejkaMagicFormula::a17 = 0.0; //0
 
 	PacejkaMagicFormula::PacejkaMagicFormula()
-		/* Called during Tyre::Tyre 
+		/* Called during Tyre::Tyre
 		*/
 	{
 		setToDriftingTyreParams();
 	}
 
-	void PacejkaMagicFormula::updateForces(double verticalLoad_N, double slipPercent_0_to_100, double slipAngle_degs, double camberAngle_degs) 
-		/* Called by Tyre::update 
+	void PacejkaMagicFormula::updateForces(double verticalLoad_N, double slipPercent_0_to_100, double slipAngle_degs, double camberAngle_degs)
+		/* Called by Tyre::update
 		*/
 	{
 		//http://www.edy.es/dev/docs/pacejka-94-parameters-explained-a-comprehensive-guide/
@@ -56,7 +56,7 @@ namespace Internal {
 		updateLateralForce(verticalLoad_N / 1000.0, slipAngle_degs, camberAngle_degs);
 	}
 
-	void PacejkaMagicFormula::setToRoadTyreParams() 
+	void PacejkaMagicFormula::setToRoadTyreParams()
 		/* Called by UILayer::tyreParameters
 		*/
 	{
@@ -97,8 +97,8 @@ namespace Internal {
 		a17 = 0.0;
 	}
 
-	void PacejkaMagicFormula::setToDriftingTyreParams() 
-		/* Called by 
+	void PacejkaMagicFormula::setToDriftingTyreParams()
+		/* Called by
 		 * - PacejkaMagicFormula::PacejkaMagicFormula
 		 * - UILayer::tyreParameters
 		*/
@@ -140,7 +140,7 @@ namespace Internal {
 		a17 = 0.0;
 	}
 
-	void PacejkaMagicFormula::updateLongitudinalForce(double load_kN, double slipAsPercent) 
+	void PacejkaMagicFormula::updateLongitudinalForce(double load_kN, double slipAsPercent)
 		/* Called by PacejkaMagicFormula::updateForces
 		*/
 	{
@@ -163,7 +163,7 @@ namespace Internal {
 		mLongitudinalForce = D * sin(C * atan(Bx1 - E * (Bx1 - atan(Bx1)))) + V;
 	}
 
-	void PacejkaMagicFormula::updateLateralForce(double load_kN, double slipAngle_degs, double camberAngle_degs) 
+	void PacejkaMagicFormula::updateLateralForce(double load_kN, double slipAngle_degs, double camberAngle_degs)
 		/* Called by PacejkaMagicFormula::updateForces
 		*/
 	{

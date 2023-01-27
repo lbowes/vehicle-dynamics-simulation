@@ -1,6 +1,6 @@
 #include "Wheel.h"
 
-namespace Internal { 
+namespace Internal {
 
 	Wheel::Wheel() :
 		/* Called during WheelInterface::WheelInterface
@@ -8,28 +8,28 @@ namespace Internal {
 		mTyre(mRimRadius)
 	{ }
 
-	void Wheel::update(glm::dmat4 carToWorldRotation_car, glm::dvec3 terrainNormalUnderWheel, glm::dvec2 wheelVel_car, double load, double totalInputTorque, double dt) 
+	void Wheel::update(glm::dmat4 carToWorldRotation_car, glm::dvec3 terrainNormalUnderWheel, glm::dvec2 wheelVel_car, double load, double totalInputTorque, double dt)
 		/* Called by WheelInterface::updateWheel
 		*/
 	{
 		mInertiaAboutAxle = mTyre.getAxialInertia();
-		
+
 		updateAngularMotion(totalInputTorque, dt);
-		
+
 		mRotationDirection = mAngularVelocity < 0.0 ? -1 : mAngularVelocity > 0.0 ? 1 : 0;
 
 		glm::dvec2 wheelVel_wheel = glm::rotate(wheelVel_car, glm::radians(mSteeringAngle));
 		mTyre.update(wheelVel_wheel, load, 0.0, mRimRadius, mAngularVelocity);
-		
+
 		updateTyreForce_world(carToWorldRotation_car, terrainNormalUnderWheel);
 	}
-	
-	void Wheel::reset() 
+
+	void Wheel::reset()
 		/* Called by WheelInterface::reset
 		*/
 	{
-		mAngularAcceleration = 0.0;  
-		mAngularVelocity = 0.0;      
+		mAngularAcceleration = 0.0;
+		mAngularVelocity = 0.0;
 		mAngularPosition = 0.0;
 		mRotationDirection = 0;
 		mSteeringAngle = 0.0;
@@ -37,7 +37,7 @@ namespace Internal {
 		resetToBasePosition();
 	}
 
-	void Wheel::updateAngularMotion(double totalTorque, double dt) 
+	void Wheel::updateAngularMotion(double totalTorque, double dt)
 		/* Called by Wheel::update
 		 * Handles the updating of state that is only linked to angular motion
 		*/
@@ -48,14 +48,14 @@ namespace Internal {
 		mAngularVelocity += mAngularAcceleration * dt;
 		mAngularPosition += mAngularVelocity * dt;
 
-		if (mAngularPosition >= glm::two_pi<double>()) 
+		if (mAngularPosition >= glm::two_pi<double>())
 			mAngularPosition -= glm::two_pi<double>();
 
 		if (mAngularPosition <= -glm::two_pi<double>())
 			mAngularPosition += glm::two_pi<double>();
 	}
 
-	void Wheel::updateTyreForce_world(glm::dmat4 carToWorldRotation_car, glm::dvec3 terrainNormalUnderWheel) 
+	void Wheel::updateTyreForce_world(glm::dmat4 carToWorldRotation_car, glm::dvec3 terrainNormalUnderWheel)
 		/* Called by Wheel::update
 		 * Transforms individual tyre force components, into a 3D force vector in world space that lies tangent to the terrain surface
 		*/

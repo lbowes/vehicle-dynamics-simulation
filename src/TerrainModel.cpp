@@ -15,12 +15,12 @@ namespace Visual {
 		mModel.sendRenderCommands(renderer);
 	}
 
-	void TerrainModel::loadModel() 
+	void TerrainModel::loadModel()
 		/* Called by TerrainModel::TerrainModel
 		*/
 	{
 		using namespace Framework::Graphics;
-		
+
 		//This function needs to load the model with procedurally generated terrain
 
 		std::vector<float> positionData;
@@ -59,7 +59,7 @@ namespace Visual {
 		mModel.addMesh(terrainMesh);
 	}
 
-	void TerrainModel::fillWithPositionData(std::vector<float>& toFill) 
+	void TerrainModel::fillWithPositionData(std::vector<float>& toFill)
 		/* Called by TerrainModel::loadModel
 		*/
 	{
@@ -132,7 +132,7 @@ namespace Visual {
 		}
 	}
 
-	void TerrainModel::fillWithNormalData(std::vector<float>& toFill) 
+	void TerrainModel::fillWithNormalData(std::vector<float>& toFill)
 		/* Called by TerrainModel::loadModel
 		 * Iterates over the terrain, and retrieves the surface normal vector for each triangle before adding it to the buffer passed in
 		*/
@@ -146,17 +146,17 @@ namespace Visual {
 		*
 		* Left triangle 'L' / right triangle 'R'
 		*
-		*   ___   
+		*   ___
 		*  |  / /|
 		*  |L/ /R|
 		*  |/ /__|
-		*    	      
+		*
 		*/
 
 		using namespace glm;
 		using namespace External;
 
-		const int 
+		const int
 			terrainSize = Environment::mTerrain.getSize(),
 			halfTerrainSize = floor(0.5 * terrainSize);
 
@@ -165,14 +165,14 @@ namespace Visual {
 			rightTriangleNormal;
 
 		int
-			normalsArrayIndexX = 0, 
-			heightsIndex = 0;       
+			normalsArrayIndexX = 0,
+			heightsIndex = 0;
 
 		for (int x = -halfTerrainSize; x < halfTerrainSize; x++) {
 			for (int z = -halfTerrainSize; z < halfTerrainSize; z++) {
 				heightsIndex = (x + halfTerrainSize) * terrainSize + (z + halfTerrainSize);
 				normalsArrayIndexX = floor(heightsIndex / terrainSize);
-				
+
 				leftTriangleNormal = Environment::mTerrain.mNormals[2 * (heightsIndex - normalsArrayIndexX)];
 				rightTriangleNormal = Environment::mTerrain.mNormals[2 * (heightsIndex - normalsArrayIndexX) + 1];
 
@@ -209,7 +209,7 @@ namespace Visual {
 		}
 	}
 
-	void TerrainModel::fillWithColourData(std::vector<float>& toFill) 
+	void TerrainModel::fillWithColourData(std::vector<float>& toFill)
 		/* Called by TerrainModel::loadModel
 		*/
 	{
@@ -297,7 +297,7 @@ namespace Visual {
 		}
 	}
 
-	void TerrainModel::fillWithIndexData(std::vector<unsigned int>& toFill) 
+	void TerrainModel::fillWithIndexData(std::vector<unsigned int>& toFill)
 		/*Called by TerrainModel::loadModel
 		*/
 	{

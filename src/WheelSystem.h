@@ -16,11 +16,11 @@
 
 namespace Internal {
 	class ControlSystem;
-	
+
 	class WheelSystem {
 		friend class Axle;
 	public:
-		enum AxlePos : unsigned char { FRONT, REAR };          
+		enum AxlePos : unsigned char { FRONT, REAR };
 		enum Side : unsigned char { LEFT, RIGHT };
 
 	private:
@@ -31,7 +31,7 @@ namespace Internal {
 			mWheelHeight = 0.13;        //m
 
 		double mMinTurningRadius = 0.0; //m
-		
+
 		glm::dvec3
 			mTotalForce_world,
 			mTotalTorque_world;
@@ -58,7 +58,7 @@ namespace Internal {
 		inline Axle& getAxle(AxlePos pos) { return pos == AxlePos::FRONT ? mFrontAxle : mRearAxle; }
 		inline glm::dvec3 getTotalForce_world() const { return mTotalForce_world; }
 		inline glm::dvec3 getTotalTorque_world() const { return mTotalTorque_world; }
-		
+
 		inline void setMinimumTurnRadius(double minTurnRadius) { mMinTurningRadius = minTurnRadius; }
 
 	private:

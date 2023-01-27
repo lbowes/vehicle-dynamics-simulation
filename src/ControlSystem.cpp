@@ -4,14 +4,14 @@
 
 namespace Internal {
 
-	void ControlSystem::update(double wheelBase, double frontAxleTrack) 
+	void ControlSystem::update(double wheelBase, double frontAxleTrack)
 		/* Called by Car::update
 		*/
 	{
 		updateSteeringAngle(wheelBase, frontAxleTrack);
 	}
 
-	void ControlSystem::handleInput(double dt) 
+	void ControlSystem::handleInput(double dt)
 		/* Called by Car::checkInput
 		 * Called once per Car update
 		*/
@@ -20,7 +20,7 @@ namespace Internal {
 		handleSpeedInput();
 	}
 
-	void ControlSystem::attachWheels(Wheel* left, Wheel* right) 
+	void ControlSystem::attachWheels(Wheel* left, Wheel* right)
 		/* Called by WheelSystem::bindControlSystem
 		 * Called once at load time
 		*/
@@ -29,7 +29,7 @@ namespace Internal {
 		mRightWheel = right;
 	}
 
-	void ControlSystem::setMaxAbsWheelAngle(double maxAbsAngle) 
+	void ControlSystem::setMaxAbsWheelAngle(double maxAbsAngle)
 		/* Called by Car::assemble
 		 * Called once at load time
 		*/
@@ -38,13 +38,13 @@ namespace Internal {
 		mMaxAbsSteeringWheelAngle = maxAbsAngle * mSteeringRatio;
 	}
 
-	void ControlSystem::updateSteeringAngle(double wheelBase, double frontAxleTrack) 
+	void ControlSystem::updateSteeringAngle(double wheelBase, double frontAxleTrack)
 		/* Called by ControlSystem::update
 		 * Responsible for updating the steering angles of both attached wheels
 		*/
 	{
 		using namespace glm;
-		
+
 		//Using the current steering wheel's angle, this can set the deflection angles of the two front wheels
 		//accounting for Ackermann geometry and the steering ratio.
 		double
@@ -66,8 +66,8 @@ namespace Internal {
 		mLeftWheel->setSteeringAngle(leftWheelAngle);
 		mRightWheel->setSteeringAngle(rightWheelAngle);
 	}
-	
-	void ControlSystem::handleSteeringInput(double dt) 
+
+	void ControlSystem::handleSteeringInput(double dt)
 		/* Called by ControlSystem::handleInput
 		 * Responsible for handling the input for just the steering wheel
 		*/
@@ -98,7 +98,7 @@ namespace Internal {
 		}
 	}
 
-	void ControlSystem::handleSpeedInput() 
+	void ControlSystem::handleSpeedInput()
 		/* Called by ControlSystem::handleInput
 		 * Responsible for handling the input for changing the speed of the Car
 		*/

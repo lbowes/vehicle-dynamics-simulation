@@ -27,13 +27,13 @@ namespace Visual {
 	private:
 		Framework::Window& mWindow;
 		Framework::ResourceSet mResourceHolder;
-		
-		Framework::Graphics::Renderer 
+
+		Framework::Graphics::Renderer
 			mBaseRenderer,
 			mDebugLayerRenderer;
-		
+
 		Internal::Car& mDataSource;
-		
+
 		//temp
 		std::unique_ptr<Framework::OrthographicCamera> orthoCam;
 		//
@@ -46,7 +46,7 @@ namespace Visual {
 		std::unique_ptr<EnvironmentModel> mEnvironmentModel;
 
 		bool mDebugMode = false;
-	
+
 		float& mSimulationSpeedHandle;
 
 	public:

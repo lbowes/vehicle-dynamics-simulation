@@ -25,7 +25,7 @@ namespace Internal {
 		Axle() = default;
 		~Axle() = default;
 
-		void update(double RPM, double totalCounterTorque) 
+		void update(double RPM, double totalCounterTorque)
 			/* Called by WheelSystem::updateAxles
 			 * Calculates a total torque value based on counter torque passed in and drive torque
 			*/
@@ -42,7 +42,7 @@ namespace Internal {
 			//Add resiting torque from wheel traction and brakes
 			mTransferredTorque += totalCounterTorque;
 		}
-		
+
 		inline double getTransferredTorque() const { return mTransferredTorque; }
 		inline double getLongDisplacement_car() const { return mLongDisplacement_car; }
 		inline double getLength() const { return mLength; }

@@ -9,7 +9,7 @@ namespace Internal {
 		mConnectedAxle(connectedAxle)
 	{ }
 
-	void WheelInterface::update(Framework::Physics::State& carState, double load, double dt) 
+	void WheelInterface::update(Framework::Physics::State& carState, double load, double dt)
 		/* Called by WheelSystem::updateAllWheelInterfaces
 		 * Updates all per-wheel components
 		 * Transforms car physical-state data before passing it to components
@@ -36,7 +36,7 @@ namespace Internal {
 		updateWheel(carState.getLocalToWorld_direction(), terrainNormal, terrainOverlap, dt);
 	}
 
-	void WheelInterface::setPosition_car(glm::dvec3 newPosition_car) 
+	void WheelInterface::setPosition_car(glm::dvec3 newPosition_car)
 		/* Called by WheelSystem::positionWheelInterfaces
 		 * Changing Wheel interface position, must cause the Wheel to change position
 		*/
@@ -50,7 +50,7 @@ namespace Internal {
 		mSuspension.neutralise();
 	}
 
-	void WheelInterface::reset() 
+	void WheelInterface::reset()
 		/* Called by WheelSystem::reset
 		*/
 	{
@@ -59,7 +59,7 @@ namespace Internal {
 		mLoad = 0.0;
 	}
 
-	void WheelInterface::updateWheel(glm::dmat4 carToWorldRotation_car, glm::dvec3 terrainNormalUnderWheel, double terrainOverlap, double dt) 
+	void WheelInterface::updateWheel(glm::dmat4 carToWorldRotation_car, glm::dvec3 terrainNormalUnderWheel, double terrainOverlap, double dt)
 		/* Called by WheelInterface::update
 		*/
 	{

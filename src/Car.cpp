@@ -7,29 +7,29 @@ namespace Internal {
 		 * Fully sets up this object ready for the start of the simulation
 		*/
 		RigidBody(Framework::Physics::RigidBody::IntegrationMethod::EULER)
-	{ 
+	{
 		assemble();
 		resetToTrackPosition();
-	} 
-	
-	void Car::update(double t, double dt) 
+	}
+
+	void Car::update(double t, double dt)
 		/* Called by VehicleSimulation::onUpdate
 		 * The core update function for the Car's simulation
-		 * Updates member objects and then updates own internal physical state  
+		 * Updates member objects and then updates own internal physical state
 		*/
 	{
 		//Member objects updated
 		mControlSystem.update(mWheelSystem.getWheelBase(), mWheelSystem.getAxle(WheelSystem::AxlePos::FRONT).getLength());
 		mTorqueGenerator->update();
 		mWheelSystem.update(mState, mAcceleration, dt);
-		
+
 		//State advanced by dt seconds
 		integrate(t, dt);
-		
+
 		positionConstraints();
 	}
 
-	void Car::checkInput(double dt) 
+	void Car::checkInput(double dt)
 		/* Called by VehicleSimulation::onInputCheck
 		 * Passes main input handling responsibility to mControlSystem
 		*/
@@ -44,7 +44,7 @@ namespace Internal {
 		}
 	}
 
-	void Car::resetToTrackPosition() 
+	void Car::resetToTrackPosition()
 		/* Called by
 		 * - Car::Car
 		 * - Car::checkInput
@@ -55,9 +55,9 @@ namespace Internal {
 		mState.setPosition_world(glm::dvec3(10.0, -1.0, 0.0));
 	}
 
-	void Car::updateTotalForce_world() 
+	void Car::updateTotalForce_world()
 		/* Called by Car::getForce_world
-		 * Responsible for summating all forces affecting the Car 
+		 * Responsible for summating all forces affecting the Car
 		*/
 	{
 		mTotalForce_world = glm::dvec3(0.0);
@@ -73,7 +73,7 @@ namespace Internal {
 		mTotalForce_world += mAerodynamicDrag_world;                                                                    //Aerodynamic drag
 	}
 
-	glm::dvec3 Car::getForce_world(Framework::Physics::State& state, double t) 
+	glm::dvec3 Car::getForce_world(Framework::Physics::State& state, double t)
 		/* Called by RigidBody::integrate
 		 * Pure virtual function, inherited from RigidBody
 		*/
@@ -82,7 +82,7 @@ namespace Internal {
 		return mTotalForce_world;
 	}
 
-	void Car::updateTotalTorque_world() 
+	void Car::updateTotalTorque_world()
 		/* Called by Car::getTorque_world
 		 * Responsible for summating all torques affecting the Car
 		 */
@@ -92,7 +92,7 @@ namespace Internal {
 		mTotalTorque_world = mWheelSystem.getTotalTorque_world(); //Wheels
 	}
 
-	glm::dvec3 Car::getTorque_world(Framework::Physics::State& state, double t) 
+	glm::dvec3 Car::getTorque_world(Framework::Physics::State& state, double t)
 		/* Called by RigidBody::integrate
 		* Pure virtual function, inherited from RigidBody
 		*/
@@ -101,7 +101,7 @@ namespace Internal {
 		return mTotalTorque_world;
 	}
 
-	void Car::positionConstraints() 
+	void Car::positionConstraints()
 		/* Called by Car::update
 		 * Point collision with the terrain's surface, and a boundary constraint at edges of the terrain
 		 * Corrective action after physics state update
@@ -129,7 +129,7 @@ namespace Internal {
 		double halfTerrainSize = floor(Environment::mTerrain.getSize() * 0.5);
 		if (positionInitial.x < -halfTerrainSize) {
 			newPosition.x = -halfTerrainSize;
-			
+
 			//This causes the Car to bounce of the invisible walls at terrain edges
 			newVelocity.x *= -0.5;
 		}
@@ -151,7 +151,7 @@ namespace Internal {
 		mState.setVelocity_world(newVelocity);
 	}
 
-	void Car::assemble() 
+	void Car::assemble()
 		/* Called by Car::Car
 		 * Crucial that this is called before the simulation begins
 		 * 'Wires together' sub components of the Car

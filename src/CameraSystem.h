@@ -24,7 +24,7 @@ namespace Visual {
 	class CameraSystem {
 	public:
 		enum CameraName { FPV, FR_WHEEL, DRIVER };
-	
+
 	private:
 		std::vector<std::unique_ptr<SimulationCamera>> mCameras;
 

@@ -12,7 +12,7 @@ namespace Visual {
 		loadResources();
 	}
 
-	void DebugCarModel::render(Framework::Graphics::Renderer& renderer) 
+	void DebugCarModel::render(Framework::Graphics::Renderer& renderer)
 		/* Called by VisualShell::renderAll
 		*/
 	{
@@ -20,23 +20,23 @@ namespace Visual {
 		mModel.sendRenderCommands(renderer);
 	}
 
-	void DebugCarModel::addVectorLines() 
+	void DebugCarModel::addVectorLines()
 		/* Called by DebugCarModel::DebugCarModel
 		 * Called once at load-time
 		 * Adds vector line objects to the mVectorGroup object
 		*/
 	{
 		using namespace glm;
-		
+
 		//3 vectors for each wheel
 		for (unsigned char i = 0; i < mCarData.getWheelSystem().getAllWheelInterfaces().size(); i++) {
-			
+
 			//Wheel-to-ground displacement
 			mVectorGroup.addVector(DebugVector(vec3(), vec3(), vec4(1.0f, 1.0f, 0.0f, 1.0f)));
-			
+
 			//Tyre force
 			mVectorGroup.addVector(DebugVector(vec3(), vec3(), vec4(0.0f, 1.0f, 1.0f, 1.0f)));
-			
+
 			//Wheel interface velocity (world space)
 			mVectorGroup.addVector(DebugVector(vec3(), vec3(), vec4(1.0f, 0.0f, 1.0f, 1.0f)));
 
@@ -54,7 +54,7 @@ namespace Visual {
 		mVectorGroup.addVector(DebugVector(vec3(), vec3(), vec4(1.0f, 0.5f, 0.0f, 1.0f)));
 	}
 
-	void DebugCarModel::loadResources() 
+	void DebugCarModel::loadResources()
 		/* Called by DebugCarModel::DebugCarModel
 		 * Called once at load-time
 		*/
@@ -72,12 +72,12 @@ namespace Visual {
 		loadVectorLines();
 	}
 
-	void DebugCarModel::populateWheelColourBufferData() 
+	void DebugCarModel::populateWheelColourBufferData()
 		/* Called by DebugCarModel::loadResources
 		 * Called once at load-time
 		*/
 	{
-		//Fill one buffer with a red colour...  
+		//Fill one buffer with a red colour...
 		for (unsigned int i = 0; i < 2 * mWheelNumSides; i++) {
 			mWheelCollidingColourData.push_back(mWheelCollidingColour.x);
 			mWheelCollidingColourData.push_back(mWheelCollidingColour.y);
@@ -94,7 +94,7 @@ namespace Visual {
 		}
 	}
 
-	void DebugCarModel::carBaseResources() 
+	void DebugCarModel::carBaseResources()
 		/* Called by DebugCarModel::loadResources
 		 * Instantiates and initialises a mesh for the rectangular base overlay of the Car
 		*/
@@ -151,16 +151,16 @@ namespace Visual {
 		mModel.addMesh(debugBaseMesh);
 	}
 
-	void DebugCarModel::carWheelsResources() 
+	void DebugCarModel::carWheelsResources()
 		/* Called by DebugCarModel::loadResources
 		 * Instantiates and initialises meshes for the car's wheels
 		*/
 	{
 		using namespace Framework::Graphics;
-		
+
 		//Used to give the wheel mesh resources unique ID's
 		std::string wheelId = "";
-		Internal::Wheel* targetWheel = nullptr; 
+		Internal::Wheel* targetWheel = nullptr;
 
 		//For each wheel on the vehicle...
 		for (unsigned char i = 0; i < mCarData.getWheelSystem().getAllWheelInterfaces().size(); i++) {
@@ -178,11 +178,11 @@ namespace Visual {
 				glm::vec2
 					startPointer = glm::vec2(0.0f, 1.0f),
 					currentPointer = startPointer;
-				
+
 				//Procedurally generates the vertex positions of circles by rotating a vector around the circumference,
 				//like one of the hands of a clock, starting at 12 o'clock and sampling the position of the end of the hand
 				//before adding it to the buffer.
-				
+
 				//z-aligned circle first
 				for (unsigned char side = 0; side < mWheelNumSides; side++) {
 					currentPointer = glm::rotate(startPointer, glm::radians(side / (float)mWheelNumSides * 360.0f)) * sphereRadius;
@@ -210,7 +210,7 @@ namespace Visual {
 			//Create a vertex colour buffer and fill with data
 			{
 				std::vector<float> debugWheelColours;
-				
+
 				//Run through each vertex on each the circles
 				for (unsigned char i = 0; i < debugWheelPositions.size() / 3; i++) {
 					//And give it a blue colour
@@ -232,7 +232,7 @@ namespace Visual {
 					debugWheelIndices.push_back(i);
 					debugWheelIndices.push_back(i + 1);
 				}
-				
+
 				debugWheelIndices.push_back(numVertices - 1);
 				debugWheelIndices.push_back(0);
 
@@ -249,9 +249,9 @@ namespace Visual {
 		}
 	}
 
-	void DebugCarModel::loadVectorLines() 
+	void DebugCarModel::loadVectorLines()
 		/* Called by DebugCarModel::loadResources
-		 * Instantiates and populates the position, colour and index buffer of the vectors  
+		 * Instantiates and populates the position, colour and index buffer of the vectors
 		*/
 	{
 		using namespace Framework::Graphics;
@@ -277,8 +277,8 @@ namespace Visual {
 		mResourceBucket.getResource<IndexBuffer>("debugVectorIndices")->updateData(mVectorGroup.getIndexBuffer());
 	}
 
-	void DebugCarModel::update() 
-		/* Called by DebugCarModel::render 
+	void DebugCarModel::update()
+		/* Called by DebugCarModel::render
 		 * Each frame, the colours of specific meshes must be updated to represent a collision
 		 * The transforms of these meshes are also updated
 		*/
@@ -304,7 +304,7 @@ namespace Visual {
 				1.0f, 0.0f, 0.0f, 1.0f,
 				1.0f, 0.0f, 0.0f, 1.0f
 			};
-			
+
 			{
 				if (mCarData.getState().getPosition_world().y <= 0.01)
 					newBaseColours = {
@@ -351,7 +351,7 @@ namespace Visual {
 				//Mesh colours
 				{
 					mResourceBucket.getResource<Framework::Graphics::VertexBuffer>("debugWheel" + std::to_string(i) + "colours")->updateData(mWheelNeutralColourData);
-					
+
 					if (wheelSystem[i]->collisionRegistered())
 						mResourceBucket.getResource<Framework::Graphics::VertexBuffer>("debugWheel" + std::to_string(i) + "colours")->updateData(mWheelCollidingColourData);
 				}
@@ -361,7 +361,7 @@ namespace Visual {
 		updateVectorLines();
 	}
 
-	void DebugCarModel::updateVectorLines() 
+	void DebugCarModel::updateVectorLines()
 		/* Called by DebugCarModel::update
 		 * The vector models' positions, directions and lengths are updated to represent the vector quantities in the simulation
 		*/
@@ -373,7 +373,7 @@ namespace Visual {
 		Internal::WheelInterface* currentWheelInterface = nullptr;
 
 		dvec3 temp;
-		
+
 		//Used to track the index of the start of the current vector line's data
 		unsigned int indexTracker = 0;
 
@@ -430,7 +430,7 @@ namespace Visual {
 		//Aerodynamic drag
 		{
 			mVectorGroup[indexTracker]->setPosition_world(carPosition_world);
-			
+
 			dvec3 drag = mCarData.getAeroDrag_world();
 			if(length(drag) > 1.0)
 				mVectorGroup[indexTracker]->setDirection_world(normalize(drag));

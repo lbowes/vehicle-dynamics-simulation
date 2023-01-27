@@ -28,7 +28,7 @@ namespace Visual {
 	class FPVCamera : public SimulationCamera {
 	private:
 		const float
-			mMovementSpeed = 275.0f,       //400.0f  
+			mMovementSpeed = 275.0f,       //400.0f
 			mMovementFriction = 7.0f,       //7.0f
 			mZoomSensitivity = 0.1f,        //0.1f
 			mLookAroundSensitivity = 0.05f; //0.05f
@@ -74,7 +74,7 @@ namespace Visual {
 	private:
 		const glm::dvec3 mPosition_car = glm::vec3(-0.401277f, 44.73737f, -1.850528f);
 
-		glm::vec3 
+		glm::vec3
 			mPositionInCar_OGL,
 			mVelocityInCar_OGL,
 			mDirection_OGL;

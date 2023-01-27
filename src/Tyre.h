@@ -28,7 +28,7 @@ namespace Internal {
 			mAngle_degs = 0.0;        //Degrees, for lateral calculations
 
 	public:
-		void update(glm::dvec2 tyreVel_lat_long, double tyreRotSpeed_radPerSec, double effectiveRollingRadius) 
+		void update(glm::dvec2 tyreVel_lat_long, double tyreRotSpeed_radPerSec, double effectiveRollingRadius)
 			/* Called by Tyre::update
 			 * Recalculates longitudinal and lateral slip
 			*/
@@ -56,13 +56,13 @@ namespace Internal {
 		friend class Wheel;
 	private:
 		Slip mSlip;
-		
+
 		glm::dvec2 mTotalForce_wheel;        //Wheel-space, x = lateral, y = longitudinal
-		
+
 		PacejkaMagicFormula mForceCalculator;
 
 		const double
-			mRubberDensity = 650.0,          //kg/m^3     
+			mRubberDensity = 650.0,          //kg/m^3
 			mDepth = 0.06544,                //m
 			mTreadWidth = 0.2,		         //m
 			mRollResistCoefficient = 0.0125, //dimensionless

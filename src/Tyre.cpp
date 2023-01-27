@@ -8,7 +8,7 @@ namespace Internal {
 		mAxialInertia((glm::pi<double>() * mRubberDensity * mTreadWidth) / 2.0 * (pow(wheelRimRadius + mDepth, 4) - pow(wheelRimRadius, 4)))
 	{ }
 
-	void Tyre::update(glm::dvec2 wheelVelocity_wheel, double verticalLoad, double camberAngle, double wheelRimRadius, double wheelRotSpeed_radPerSec) 
+	void Tyre::update(glm::dvec2 wheelVelocity_wheel, double verticalLoad, double camberAngle, double wheelRimRadius, double wheelRotSpeed_radPerSec)
 		/* Called by Wheel::update
 		*/
 	{

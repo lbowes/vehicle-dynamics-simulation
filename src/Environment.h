@@ -1,7 +1,7 @@
 /* CLASS OVERVIEW
  * - Encapsulates a static Terrain instance
  * - Contains purely static data
- * - Can be easily accessed by #including this file anywhere  
+ * - Can be easily accessed by #including this file anywhere
 */
 
 #ifndef ENVIRONMENT_H
@@ -18,7 +18,7 @@ namespace External {
 	class Environment {
 	public:
 		static Terrain mTerrain;
-		
+
 		static const double
 			mGravityAccel,
 			mAirDensity;

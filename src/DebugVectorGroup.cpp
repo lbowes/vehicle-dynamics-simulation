@@ -2,7 +2,7 @@
 
 namespace Visual {
 
-	void DebugVectorGroup::addVector(DebugVector newVector) 
+	void DebugVectorGroup::addVector(DebugVector newVector)
 		/* Called by DebugCarModel::addVectorLines
 		 * Adds a new DebugVector object instance to mVectors
 		 * Automatically updates the buffers to account for this change
@@ -27,8 +27,8 @@ namespace Visual {
 		update();
 	}
 
-	void DebugVectorGroup::update() 
-		/* Called by 
+	void DebugVectorGroup::update()
+		/* Called by
 		 * - DebugVectorGroup::addVector
 		 * - DebugCarModel::updateVectorLines
 		 * This function is responsible for rebuilding the position and colour buffers based on the data contained within the VectorLine objects in mVectors.
@@ -41,7 +41,7 @@ namespace Visual {
 			indicesPerVec = DebugVector::getNumIndices();
 
 		DebugVector* currentVector = nullptr;
-		
+
 		glm::dvec3
 			vecStartPos,
 			vecEndPos;
@@ -56,12 +56,12 @@ namespace Visual {
 		//Run through each vector
 		for (unsigned int i = 0; i < numVisibleVectors; i++) {
 			currentVector = &mVectors[i];
-			
+
 			//Retrieve the properties of the current vector
 			vecStartPos = currentVector->isVisible() ? currentVector->getPosition_world() : glm::dvec3(0.0);
 			vecEndPos = currentVector->isVisible() ? vecStartPos + currentVector->getDirection_world() : glm::dvec3(0.0);
 			vecColour = currentVector->getColour();
-			
+
 			//Position data
 			{
 				//Start point
@@ -98,17 +98,17 @@ namespace Visual {
 		}
 	}
 
-	unsigned int DebugVectorGroup::recalcNumVisbleVectors() 
+	unsigned int DebugVectorGroup::recalcNumVisbleVectors()
 		/* Called by DebugVectorGroup::update
 		*/
 	{
 		unsigned int count = 0;
-		
+
 		for (DebugVector& v : mVectors) {
 			if (v.isVisible())
 				count++;
 		}
-		
+
 		return count;
 	}
 

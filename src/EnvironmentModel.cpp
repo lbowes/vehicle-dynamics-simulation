@@ -10,7 +10,7 @@ namespace Visual {
 		loadResources();
 	}
 
-	void EnvironmentModel::render(Framework::Graphics::Renderer& renderer) 
+	void EnvironmentModel::render(Framework::Graphics::Renderer& renderer)
 		/* Called by VisualShell::renderAll
 		 * Renders everything in the Environment
 		*/
@@ -19,7 +19,7 @@ namespace Visual {
 		mSkyBox->render(renderer);
 	}
 
-	void EnvironmentModel::loadResources() 
+	void EnvironmentModel::loadResources()
 		/* Called by EnvironmentModel::EnvironmentModel
 		 * Instantiation and initialisation of all resources needed to represent the environment graphically
 		*/
@@ -39,7 +39,7 @@ namespace Visual {
 
 		//SkyBox object
 		mSkyBox = std::make_unique<Framework::Graphics::SkyBox>("res/shaders/skyBox.vert", "res/shaders/skyBox.frag");
-		
+
 		//Settings uniforms in the SkyBox shader
 		mSkyboxShader = mSkyBox->getShader();
 		mSkyboxShader->addUniformWithDefault("skyColour", mSkyColour);

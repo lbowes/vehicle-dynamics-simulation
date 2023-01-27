@@ -34,7 +34,7 @@ namespace Visual {
 			mWheelCollidingColourData;
 
 		DebugVectorGroup mVectorGroup;
-		
+
 	private:
 		void addVectorLines();
 		void loadResources();

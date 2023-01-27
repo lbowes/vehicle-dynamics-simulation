@@ -22,12 +22,12 @@ namespace Internal {
 		Wheel
 			*mLeftWheel = nullptr,
 			*mRightWheel = nullptr;
-		
+
 		std::vector<Brake*> mBrakes;
 		TorqueGenerator* mTorqueGenerator = nullptr;
 
 		const double mSteeringRate = 5000.0;
-		
+
 		double
 			mSteeringRatio = 0.0,
 			mMaxAbsWheelAngle = 0.0,	     //degs

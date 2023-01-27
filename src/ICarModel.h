@@ -32,7 +32,7 @@ namespace Visual {
 	private:
 		virtual void loadResources() = 0;
 		virtual void update() = 0;
-		
+
 
 	};
 }

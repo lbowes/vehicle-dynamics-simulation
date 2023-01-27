@@ -10,7 +10,7 @@ namespace Internal {
 	class Brake {
 	private:
 		const double mDistToWheelCentre = 0.16;  //m
-		
+
 		double
 			mCompressionForce = 0.0,  //Nm
 			mTorqueMagnitude = 0.0,   //Nm
@@ -20,7 +20,7 @@ namespace Internal {
 		Brake() = default;
 		~Brake() = default;
 
-		void update() 
+		void update()
 			/* Called by WheelInterface::update
 			*/
 		{

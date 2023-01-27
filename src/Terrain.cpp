@@ -2,7 +2,7 @@
 
 namespace External {
 
-	Terrain::Terrain() 
+	Terrain::Terrain()
 		/* Called in External::Environment
 		*/
 	{
@@ -12,8 +12,8 @@ namespace External {
 		generate();
 	}
 
-	void Terrain::generate() 
-		/* Called by Terrain::Terrain 
+	void Terrain::generate()
+		/* Called by Terrain::Terrain
 		*/
 	{
 		//Must be called in the following order due to normals needing height data for their calculation
@@ -22,7 +22,7 @@ namespace External {
 		generateSurfaceTypeData();
 	}
 
-	double Terrain::getHeight(glm::dvec2 horizontalSamplePoint) 
+	double Terrain::getHeight(glm::dvec2 horizontalSamplePoint)
 		/* Called by
 		 * - FPVCamera::afterPositionConstraints
 		 * - Car::basicCollision
@@ -43,7 +43,7 @@ namespace External {
 		using namespace glm;
 
 		//The horizontalSamplePoint will be a non-integer coordinate within the bounds of a terrain square.
-		//The location of the target within this square is required 
+		//The location of the target within this square is required
 		const dvec2 withinSquare = horizontalSamplePoint - floor(horizontalSamplePoint);
 
 		//The 3 vertices of the triangle that the target horizontalSamplePoint lies within
@@ -55,7 +55,7 @@ namespace External {
 		const int halfTerrainSize = floor(0.5 * mSize);
 
 		//Indices into the heights array
-		const unsigned int 
+		const unsigned int
 			heightsIndexBL_X = horizontalSamplePoint.x < -halfTerrainSize ? 0 : horizontalSamplePoint.x > halfTerrainSize ? mSize - 2 : floor(horizontalSamplePoint.x) + halfTerrainSize,
 			heightsIndexBL_Z = horizontalSamplePoint.y < -halfTerrainSize ? 0 : horizontalSamplePoint.y > halfTerrainSize ? mSize - 2 : floor(horizontalSamplePoint.y) + halfTerrainSize,
 			actualHeightsIndexBL = heightsIndexBL_X * mSize + heightsIndexBL_Z;
@@ -63,20 +63,20 @@ namespace External {
 		vertex1 = dvec3(0.0, mHeights[actualHeightsIndexBL], 0.0);
 
 		//If point is on lower right triangle
-		if(withinSquare.x >= withinSquare.y) 
+		if(withinSquare.x >= withinSquare.y)
 			vertex2 = dvec3(1.0, mHeights[actualHeightsIndexBL + mSize], 0.0);
 		//If point is on upper left triangle
-		else 
+		else
 			vertex2 = dvec3(0.0, mHeights[actualHeightsIndexBL + 1], 1.0);
-		
+
 		vertex3 = dvec3(1.0, mHeights[actualHeightsIndexBL + mSize + 1], 1.0);
 
 		//Use barycentric interpolation to calculate the final height given the 3 vertices and a between them
 		return Framework::Maths::barycentric(vertex1, vertex2, vertex3, withinSquare);
 	}
 
-	glm::dvec3 Terrain::getNormal_world(glm::dvec2 horizontalSamplePoint) 
-		  /* Called by 
+	glm::dvec3 Terrain::getNormal_world(glm::dvec2 horizontalSamplePoint)
+		  /* Called by
 		     - DebugCarModel::updateVectorLines
 			 - WheelInterface::update
 			 Returns the surface normal vector at any arbitrary 2D position on the terrain
@@ -85,29 +85,29 @@ namespace External {
 		return mNormals[calc_PerTriAttribute_Index(horizontalSamplePoint)];
 	}
 
-	void Terrain::generateHeightData() 
+	void Terrain::generateHeightData()
 		/* Called by Terrain::generate
 		 * Calculates and stores height data in mHeights
 		*/
 	{
 		mHeights.resize(mSize * mSize, 0.0);
-		
+
 		for (const auto& layer : mGenerationLayers)
 			layer->runHeights(mHeights);
 	}
 
-	void Terrain::generateNormalData() 
+	void Terrain::generateNormalData()
 		/* Called by Terrain::generate
 		 * Calculates and stores normal vectors in mNormals
 		*/
 	{
 		/*
-		 *       -z 
-		 *        | 
+		 *       -z
+		 *        |
 		 * -x --- + --- +x
 		 *        |
 		 *       +z
-		 * 
+		 *
 		 * Left triangle 'L' / right triangle 'R'
 		 *
 		 *    TL ___   TR
@@ -155,14 +155,14 @@ namespace External {
 				leftTriangleNormal = normalize(cross(TRpoint - TLpoint, ThisBLpoint - TLpoint));
 				rightTriangleNormal = normalize(cross(ThisBLpoint - BRpoint, TRpoint - BRpoint));
 
-				//Insert these normal vectors into the correct positions in mNormals  
+				//Insert these normal vectors into the correct positions in mNormals
 				mNormals[2 * (currentIndex - XIndex)] = leftTriangleNormal;
 				mNormals[2 * (currentIndex - XIndex) + 1] = rightTriangleNormal;
 			}
 		}
 	}
 
-	void Terrain::generateSurfaceTypeData() 
+	void Terrain::generateSurfaceTypeData()
 		/* Called by Terrain::generate
 		* Calculates and stores terrain surface types in mSurfaceTypes
 		*/
@@ -173,14 +173,14 @@ namespace External {
 			layer->runSurfaceTypes(mSurfaceTypes);
 	}
 
-	unsigned int Terrain::calc_PerTriAttribute_Index(glm::dvec2 horizontalSamplePoint) 
+	unsigned int Terrain::calc_PerTriAttribute_Index(glm::dvec2 horizontalSamplePoint)
 		/* Called by Terrain::getNormal_world
 		 * Maps any arbitrary 2D position in space, onto (the index of) the triangle it is contained within.
 		 * Works for mSurfaceTypes and mNormals (both are one-per-triangle)
 		*/
 	{
-		/*       -y 
-		 *        | 
+		/*       -y
+		 *        |
 		 * -x --- + --- +x
 		 *        |
 		 *       +y

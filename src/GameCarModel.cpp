@@ -11,7 +11,7 @@ namespace Visual {
 		loadResources();
 	}
 
-	void GameCarModel::loadResources() 
+	void GameCarModel::loadResources()
 		/* Called by GameCarModel::GameCarModel
 		 * All graphical resources such as meshes, shaders etc are instantiated here
 		*/
@@ -53,7 +53,7 @@ namespace Visual {
 		mModel.addMesh(mResourceBucket.addOBJMesh("steeringWheel", "res/models/SteeringWheel.obj", GL_TRIANGLES, nullptr, bodyShader));
 	}
 
-	void GameCarModel::setShaderUniforms(float fogDensity, float fogGradient, glm::vec3 skyColour, glm::vec3 sunDirection) 
+	void GameCarModel::setShaderUniforms(float fogDensity, float fogGradient, glm::vec3 skyColour, glm::vec3 sunDirection)
 		/* Called by VisualShell::load
 		 * Called once at load-time to give shader uniforms initial values
 		*/

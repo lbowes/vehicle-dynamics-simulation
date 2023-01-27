@@ -14,7 +14,7 @@
 #include "CameraSystem.h"
 
 namespace Internal {
-	class Car; 
+	class Car;
 }
 
 namespace Visual {

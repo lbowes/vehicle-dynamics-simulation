@@ -27,7 +27,7 @@ namespace External {
 
 			inline bool shapeIsLandscape() { return mShapeDimensions.x > mShapeDimensions.y; }
 		};
-		
+
 		PilotRunResults mPilotResults;
 
 		std::vector<glm::dvec2> mPoints_graph;
@@ -36,9 +36,9 @@ namespace External {
 
 		const unsigned int
 			mTerrainSize_heightSamples = 0,
-			mNumSamplesOverTotal = 2000, //10000   
-			mWidth = 20,                    
-			mTerrainBorderPadding = 10;     
+			mNumSamplesOverTotal = 2000, //10000
+			mWidth = 20,
+			mTerrainBorderPadding = 10;
 
 		unsigned int mSizeLimit = 0;
 

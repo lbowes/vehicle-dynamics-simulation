@@ -8,7 +8,7 @@ VehicleSimulation::VehicleSimulation() :
 	onLoad();
 }
 
-void VehicleSimulation::onLoad() 
+void VehicleSimulation::onLoad()
 	/* Called by VehicleSimulation::VehicleSimulation
 	 * Called once
 	*/
@@ -16,7 +16,7 @@ void VehicleSimulation::onLoad()
 	mVisuals = std::make_unique<Visual::VisualShell>(mCar, mWindow, mSimulationSpeed);
 }
 
-void VehicleSimulation::onInputCheck() 
+void VehicleSimulation::onInputCheck()
 	/* Called by VehicleSimulation::run
 	 * Called once per frame
 	*/
@@ -29,7 +29,7 @@ void VehicleSimulation::onInputCheck()
 	mVisuals->checkInput(mFrameTime);
 }
 
-void VehicleSimulation::onUpdate() 
+void VehicleSimulation::onUpdate()
 	/* Called by VehicleSimulation::run
 	 * Called multiple times per frame
 	*/
@@ -37,7 +37,7 @@ void VehicleSimulation::onUpdate()
 	mCar.update(mCurrentTime, mUpdateDelta * mSimulationSpeed);
 }
 
-void VehicleSimulation::onRender() 
+void VehicleSimulation::onRender()
 	/* Called by Application::render
 	 * Called once per frame
 	*/

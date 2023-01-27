@@ -14,21 +14,21 @@ namespace Internal {
 		const double
 			mSpringConstant = 49000.0,
 			mDamping = 3000.0;
-		
+
 		Framework::Physics::Spring mSpring;
 
 		glm::dvec3 mForce_world;
 
 	public:
 		Suspension() :
-			/* Called during WheelInterface::WheelInterface 
+			/* Called during WheelInterface::WheelInterface
 			*/
 			mSpring(mSpringConstant, 0.0, mDamping)
 		{ }
-		
+
 		~Suspension() = default;
 
-		void update(double verticalRoadVelocity_car, double terrainOverlap, glm::dvec3 lineOfAction_world) 
+		void update(double verticalRoadVelocity_car, double terrainOverlap, glm::dvec3 lineOfAction_world)
 			/* Called by WheelInterface::update
 			*/
 		{

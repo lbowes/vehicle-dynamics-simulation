@@ -28,16 +28,16 @@ namespace Visual {
 		mPitch = degrees(asin(normalize(direction_OGL).y));
 	}
 
-	void FPVCamera::update(float windowAspect, float dt) 
+	void FPVCamera::update(float windowAspect, float dt)
 		/* Called by CameraSystem::update
 		*/
 	{
 		//If the window is resized between updates, then the camera's aspect ratio must be changed
 		mPerspectiveCamera.setAspect(windowAspect);
 
-		//Recalculates position 
+		//Recalculates position
 		mPosition_OGL += mVelocity_OGL * dt;
-		
+
 		//Ensures that the new position is not below the terrain, or outside its borders
 		mPosition_OGL = afterPositionConstraints(mPosition_OGL);
 
@@ -48,7 +48,7 @@ namespace Visual {
 		mVelocity_OGL *= 1.0f / (1.0f + (dt * mMovementFriction));
 	}
 
-	void FPVCamera::handleInput(float dt) 
+	void FPVCamera::handleInput(float dt)
 		/* Called by CameraSystem::checkInput
 		*/
 	{
@@ -57,7 +57,7 @@ namespace Visual {
 		handleZoomInput(mPerspectiveCamera, mZoomSensitivity);
 	}
 
-	void FPVCamera::handleMovementInput(float dt) 
+	void FPVCamera::handleMovementInput(float dt)
 		/* Called by FPVCamera::handleInput
 		 * Deals with all user input that affects camera translation
 		*/
@@ -73,12 +73,12 @@ namespace Visual {
 		if (Input::isKeyPressed(GLFW_KEY_LEFT_SHIFT)) mVelocity_OGL.y -= mMovementSpeed * dt;
 	}
 
-	glm::dvec3 FPVCamera::afterPositionConstraints(glm::dvec3 input) 
+	glm::dvec3 FPVCamera::afterPositionConstraints(glm::dvec3 input)
 		/* Called by FPVCamera::update
 		*/
 	{
 		glm::dvec3 output = input;
-		
+
 		//Terrain surface constraint
 		double terrainHeight = External::Environment::mTerrain.getHeight(glm::dvec2(input.x, input.z));
 		if (input.y < terrainHeight + 0.1f)
@@ -101,7 +101,7 @@ namespace Visual {
 		SimulationCamera(position_car, direction_car, near, far, aspect, FOV)
 	{ }
 
-	void FrontWheelCamera::update(float windowAspect, glm::mat4 localToWorld_car, glm::quat localToWorldRotation_car) 
+	void FrontWheelCamera::update(float windowAspect, glm::mat4 localToWorld_car, glm::quat localToWorldRotation_car)
 		/* Called by CameraSystem::update
 		*/
 	{
@@ -111,7 +111,7 @@ namespace Visual {
 		mPerspectiveCamera.transformPosition(localToWorld_car);
 		mPerspectiveCamera.rotate(localToWorldRotation_car);
 	}
-	
+
 	DriverCamera::DriverCamera(glm::vec3 position_car, glm::vec3 direction_car, float near, float far, float aspect, float FOV) :
 		/* Called by CameraSystem::addAllCameras
 		* Initialises camera's state ready to view the simulation from the correct position/direction
@@ -120,28 +120,28 @@ namespace Visual {
 		mDirection_OGL(direction_car)
 	{
 		using namespace glm;
-												  
+
 		//Calculating intial yaw and pitch values from direction vector
 		vec3 horizontalDirection = normalize(vec3(direction_car.x, 0.0f, direction_car.z));
 		mYaw = degrees(orientedAngle(horizontalDirection, vec3(1.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f)));
 		mPitch = degrees(asin(normalize(direction_car).y));
 	}
 
-	void DriverCamera::update(float windowAspect, glm::mat4 localToWorld_car, glm::quat localToWorldRotation_car) 
+	void DriverCamera::update(float windowAspect, glm::mat4 localToWorld_car, glm::quat localToWorldRotation_car)
 		/* Called by CameraSystem::update
 		*/
 	{
 		mPerspectiveCamera.setAspect(windowAspect);
-		
+
 		//The position and up vectors of this camera are tied to the state of the Car...
 		mPerspectiveCamera.transformPosition(localToWorld_car);
 		mPerspectiveCamera.rotateUp(localToWorldRotation_car);
-		
-		//...but the user can still look around inside the vehicle																					
+
+		//...but the user can still look around inside the vehicle
 		mPerspectiveCamera.setFront(glm::vec3(localToWorldRotation_car * glm::vec4(mDirection_OGL, 1.0f)));
 	}
 
-	void DriverCamera::handleInput(float dt) 
+	void DriverCamera::handleInput(float dt)
 		/* Called by CameraSystem::checkInput
 		*/
 	{
@@ -149,7 +149,7 @@ namespace Visual {
 		handleZoomInput(mPerspectiveCamera, mZoomSensitivity);
 	}
 
-	void handleDirectionInput(Framework::PerspectiveCamera& camHandle, float& yawHandle, float& pitchHandle, glm::vec3& directionHandle, float sensitivity) 
+	void handleDirectionInput(Framework::PerspectiveCamera& camHandle, float& yawHandle, float& pitchHandle, glm::vec3& directionHandle, float sensitivity)
 		/* Called by
 		 * - FPVCamera::handleInput
 		 * - DriverCamera::handleInput
@@ -172,7 +172,7 @@ namespace Visual {
 		camHandle.setFront(directionHandle);
 	}
 
-	void handleZoomInput(Framework::PerspectiveCamera& camHandle, float sensitivity) 
+	void handleZoomInput(Framework::PerspectiveCamera& camHandle, float sensitivity)
 		/* Called by
 		 * - FPVCamera::handleInput
 		 * - DriverCamera::handleInput

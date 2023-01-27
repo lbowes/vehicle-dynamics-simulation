@@ -16,7 +16,7 @@ namespace Visual {
 			mNumPositionComponents = 6,
 			mNumColourComponents = 8,
 			mNumIndices = 2;
-		
+
 		glm::dvec3
 			mPosition_world,
 			mDirection_world;
@@ -24,7 +24,7 @@ namespace Visual {
 		glm::dvec4 mColour;
 
 		bool mIsVisible = true;
-	
+
 	public:
 		DebugVector(glm::dvec3 position_world, glm::dvec3 direction_world, glm::dvec4 colour) :
 			/* Called by DebugCarModel::addVectorLines
@@ -33,7 +33,7 @@ namespace Visual {
 			mDirection_world(direction_world),
 			mColour(colour)
 		{ }
-		
+
 		~DebugVector() = default;
 
 		static inline unsigned char getNumPositionComponents() { return mNumPositionComponents; }

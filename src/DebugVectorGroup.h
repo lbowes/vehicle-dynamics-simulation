@@ -1,5 +1,5 @@
 /* CLASS OVERVIEW
- * Responsible for creating and maintaining renderable buffers of data, that represent the DebugVectors in mVectors  
+ * Responsible for creating and maintaining renderable buffers of data, that represent the DebugVectors in mVectors
 */
 
 #ifndef DEBUGVECTORGROUP_H
@@ -14,7 +14,7 @@ namespace Visual {
 	class DebugVectorGroup {
 	private:
 		std::vector<DebugVector> mVectors;
-		
+
 		std::vector<float>
 			mPositionBuffer,
 			mColourBuffer;

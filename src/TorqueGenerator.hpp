@@ -16,7 +16,7 @@ namespace Internal {
 			mMaxOutputForwardTorque = 0.0,
 			mMaxOutputReverseTorque = 0.0,
 			mGeneratorTorque = 100.0;
-		
+
 		double
 			mOutputTorque = 0.0,
 			mRPM = 0.0,
@@ -35,7 +35,7 @@ namespace Internal {
 
 		~TorqueGenerator() = default;
 
-		void update() 
+		void update()
 			/* Called by Car::update
 			*/
 		{

@@ -3,19 +3,19 @@
 
 namespace Visual {
 
-	CameraSystem::CameraSystem(float windowAspect) 
+	CameraSystem::CameraSystem(float windowAspect)
 		/* Called by VisualShell::VisualShell
 		*/
 	{
 		addAllCameras(windowAspect);
 	}
 
-	void CameraSystem::update(float windowAspect, float dt, Internal::Car& cameraTarget) 
+	void CameraSystem::update(float windowAspect, float dt, Internal::Car& cameraTarget)
 		/* Called by VisualShell::update
 		*/
 	{
 		FPV_CAM->update(windowAspect, dt);
-		
+
 		//The front wheel camera and the driver camera are each bound to the car in some way
 		glm::mat4 carToWorldTransform = cameraTarget.getState().getLocalToWorld_position();
 		glm::quat carToWorldRotation = cameraTarget.getState().getOrientation_world();
@@ -24,7 +24,7 @@ namespace Visual {
 		DRIVER_CAM->update(windowAspect, carToWorldTransform, carToWorldRotation);
 	}
 
-	void CameraSystem::checkInput(float dt) 
+	void CameraSystem::checkInput(float dt)
 		/* Called by VisualShell::checkInput
 		*/
 	{
@@ -39,7 +39,7 @@ namespace Visual {
 			DRIVER_CAM->handleInput(dt);
 	}
 
-	void CameraSystem::cycleCameras(bool left) 
+	void CameraSystem::cycleCameras(bool left)
 		/* Called by CameraSystem::checkInput
 		 * - CameraSystem::checkInput
 		 * - UILayer::mainControlPanel
@@ -51,7 +51,7 @@ namespace Visual {
 			mCurrentCameraName = mCurrentCameraName - 1 < FPV ? DRIVER : mCurrentCameraName - 1;
 	}
 
-	void CameraSystem::addAllCameras(float windowAspect) 
+	void CameraSystem::addAllCameras(float windowAspect)
 		/* Called by CameraSystem::CameraSystem
 		 * Defines the initial states of the SimulationCameras
 		*/

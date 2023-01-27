@@ -15,7 +15,7 @@ namespace External {
 		mTerrainSize_heightSamples(terrainSize_heightSamples)
 	{
 		mTempSurfaceTypes.resize(pow(terrainSize_heightSamples - 1, 2) * 2);
-		
+
 		addAllPoints();
 		runPilotVersion();
 
@@ -25,7 +25,7 @@ namespace External {
 		updateStartingPosition();
 	}
 
-	void Track::runHeights(std::vector<double>& previousLayerHeights) 
+	void Track::runHeights(std::vector<double>& previousLayerHeights)
 		/* Called by Terrain::generateHeightData
 		 * Adds the track shape to the terrain height buffer passed in
 		*/
@@ -48,13 +48,13 @@ namespace External {
 
 		//Iterate over the shape of the track by taking small steps along a changing direction vector
 		for (unsigned int i = 0; i < mNumSamplesOverTotal; i++) {
-			
+
 			//Look up the angle of the 2D direction vector, clockwise from the -Z axis, at the current position on the track
 			currentAngle = lookUpAngleAtPercent_graph((double)i / (double)mNumSamplesOverTotal);
 
 			//Create a direction (unit) vector using this angle
 			currentDirection = normalize(glm::rotate(mStartDirection, glm::radians(currentAngle)));
-			
+
 			//Take a step along the vector
 			positionTracker += currentDirection * mPilotToMainScaleFactor;
 
@@ -71,7 +71,7 @@ namespace External {
 
 				//If this is different to the previous square...
 				if (currentX != lastX || currentZ != lastZ) {
-					
+
 					//...then imprint/'stamp' a circle with the track width as its diameter around this point and continue
 					imprintCircle(previousLayerHeights, currentX, currentZ);
 					lastX = currentX;
@@ -79,21 +79,21 @@ namespace External {
 				}
 			}
 			else
-				continue; 
+				continue;
 		}
 	}
 
-	void Track::runSurfaceTypes(std::vector<unsigned char>& previousLayerSurfaceTypes) 
+	void Track::runSurfaceTypes(std::vector<unsigned char>& previousLayerSurfaceTypes)
 		/* Called by Terrain::generateSurfaceTypeData
 		 * Sets the terrain surface types for the track
 		*/
 	{
 		//To avoid unnecessarily iterating over the track twice, mTempSurfaceTypes is filled DURING the height iteration and then
-		//just copied into previousLayerSurfaceTypes here. 
+		//just copied into previousLayerSurfaceTypes here.
 		previousLayerSurfaceTypes = mTempSurfaceTypes;
 	}
 
-	void Track::addAllPoints() 
+	void Track::addAllPoints()
 		/* Called by Track::Track
 		 * Defines the shape of a continuous loop (independent of position, orientation or scale)
 		*/
@@ -195,7 +195,7 @@ namespace External {
 		mPoints_graph.push_back(glm::dvec2(1.0, 360.0));
 	}
 
-	void Track::addPoint_graph(double percent, double angle) 
+	void Track::addPoint_graph(double percent, double angle)
 		/* Called by Track::addAllPoints
 		*/
 	{
@@ -205,12 +205,12 @@ namespace External {
 			printf("ERROR: Point out of bounds: (%g, %g)\n", percent, angle);
 	}
 
-	double Track::lookUpAngleAtPercent_graph(double percent) 
+	double Track::lookUpAngleAtPercent_graph(double percent)
 		/* Called by
 		 * - Track::runPilotVersion
 		 * - Track::runHeights
 		 * Input: a percentage along the track, given between 0.0 and 1.0
-		 * Output: the angle of the tangent to the track at this percentage 
+		 * Output: the angle of the tangent to the track at this percentage
 		*/
 	{
 		//Lower and upper bounds for interpolation are both points on the graph
@@ -224,7 +224,7 @@ namespace External {
 
 		//Iterate over all points on the percentage-angle graph
 		for (unsigned int i = 0; i < mPoints_graph.size(); i++) {
-			
+
 			//If there's a point on the graph with the exact target percentage...
 			if (mPoints_graph[i].x == percent) {
 
@@ -232,7 +232,7 @@ namespace External {
 
 				unsigned int latest = 0;
 
-				//Just check that there aren't any other more recent points with the same coordinate 
+				//Just check that there aren't any other more recent points with the same coordinate
 				for (unsigned int j = i; j < mPoints_graph.size(); j++) {
 					if (mPoints_graph[j].x == percent)
 						latest = j;
@@ -242,10 +242,10 @@ namespace External {
 			}
 			//Just overshot the target point
 			else if (mPoints_graph[i].x > percent) {
-				
+
 				//The point behind the current position
 				behind = mPoints_graph[i - 1];
-				
+
 				//The point ahead of the current position
 				ahead = mPoints_graph[i];
 
@@ -261,7 +261,7 @@ namespace External {
 		}
 	}
 
-	void Track::imprintCircle(std::vector<double>& toImprintHeights, int centreX, int centreZ) 
+	void Track::imprintCircle(std::vector<double>& toImprintHeights, int centreX, int centreZ)
 		/* Called by Track::runHeights
 		 * Imprints a circle with a diameter of mWidth, and centre (centreX, centreZ) in the terrain height data
 		*/
@@ -281,10 +281,10 @@ namespace External {
 			circleWeighting = 0.0,    //A value between 0.0 and 1.0 describing the depth of the 'bowl' shape at a point
 			newHeight = 0.0;		  //Used to store the new height being added to the terrain
 
-		//Iterate over a square of points around (centreX, centreZ) 
+		//Iterate over a square of points around (centreX, centreZ)
 		for (int x = -circleRadius; x <= circleRadius; x++) {
 			for (int z = -circleRadius; z <= circleRadius; z++) {
-				
+
 				//Calculate the distance of the current point to the centre of the circle
 				distToCircleCentre = sqrt(pow(x, 2.0) + pow(z, 2.0));
 
@@ -301,7 +301,7 @@ namespace External {
 
 				//Check that this point is actually within the terrain
 				if (targetX >= -halfTerrainSize && targetX <= halfTerrainSize && targetZ >= -halfTerrainSize && targetZ <= halfTerrainSize) {
-					
+
 					//This line is used to give the track a 'bowl' like shape, by calculating a depth based on the distance to the centre of the circle
 					circleWeighting = (1.0 - pow(distToCircleCentre / circleRadius, 3.0));
 					newHeight = circleWeighting * -mMaxDepth;
@@ -318,10 +318,10 @@ namespace External {
 		}
 	}
 
-	void Track::runPilotVersion() 
+	void Track::runPilotVersion()
 		/* Called by Track::Track
 		 * Iterates over the track shape once to determine various parameters required before the full iteration is completed,
-		 * like the bounds of shape, its dimensions and a 
+		 * like the bounds of shape, its dimensions and a
 		*/
 	{
 		//Used to store values during the iteration
@@ -335,7 +335,7 @@ namespace External {
 
 		//Iterate round the shape with a given number of samples
 		for (unsigned int i = 0; i < mNumSamplesOverTotal; i++) {
-			
+
 			//The the current percentage round the track, between 0.0 and 1.0
 			percent = (double)i / (double)mNumSamplesOverTotal;
 			currentAngle = lookUpAngleAtPercent_graph(percent);
@@ -358,7 +358,7 @@ namespace External {
 		mPilotResults.mShapeDimensions = mPilotResults.mUpperBoundDisplacement - mPilotResults.mLowerBoundDisplacement;
 	}
 
-	void Track::updateStartingPosition() 
+	void Track::updateStartingPosition()
 		/* Called by Track::Track
 		 * Calculates the starting position of the track, for the full iteration, given the results obtained by the pilot run.
 		 * This accounts for the track dimensions, width, and mTerrainBorderPadding (the space that should always be left
@@ -366,7 +366,7 @@ namespace External {
 		*/
 	{
 		//Occurs on both axes
-		double 
+		double
 			terrainSize_units = mTerrainSize_heightSamples - 1,
 			completePadding = mTerrainBorderPadding + 0.5 * mWidth;
 

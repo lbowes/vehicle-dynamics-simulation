@@ -18,7 +18,7 @@ namespace Visual {
 		load();
 	}
 
-	void UILayer::render() 
+	void UILayer::render()
 		/* Called by VisualShell::renderAll
 		 * Renders all active ImGui windows
 		*/
@@ -34,7 +34,7 @@ namespace Visual {
 		upsideDownWarning();
 	}
 
-	void UILayer::load() const 
+	void UILayer::load() const
 		/* Called by UILayer::UILayer
 		*/
 	{
@@ -46,10 +46,10 @@ namespace Visual {
 		ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0.64705882352, 0.64705882352, 0.64705882352, 0.4f));
 	}
 
-	void UILayer::mainControlPanel() 
+	void UILayer::mainControlPanel()
 		/* Called by UILayer::render
 		 * Defines the structure of the main control panel window
-		 * The main control panel is always available (unlike other windows that can be hidden) 
+		 * The main control panel is always available (unlike other windows that can be hidden)
 		*/
 	{
 		using namespace ImGui;
@@ -85,11 +85,11 @@ namespace Visual {
 					glm::dvec3 currentPosition = carState.getPosition_world();
 					carState.reset();
 					carState.setPosition_world(currentPosition + glm::dvec3(0.0, 5.0, 0.0));
-					
+
 					carState.setOrientation_world(
 						rotate(
-							carState.getOrientation_world(), 
-							glm::radians(30.0), 
+							carState.getOrientation_world(),
+							glm::radians(30.0),
 							glm::dvec3((double)rand() / RAND_MAX * 2.0 - 0.5, 0.0, (double)rand() / RAND_MAX * 2.0 - 0.5)
 						)
 					);
@@ -128,7 +128,7 @@ namespace Visual {
 		End();
 	}
 
-	void UILayer::carCustomisation() const 
+	void UILayer::carCustomisation() const
 		/* Called by UILayer::render
 		 * Defines the structure of the car customisation window
 		*/
@@ -180,7 +180,7 @@ namespace Visual {
 		End();
 	}
 
-	void UILayer::driverInfo() const 
+	void UILayer::driverInfo() const
 		/* Called by UILayer::render
 		 * Displays at-a-glance information about the car
 		 * Defines the structure of the driver information window
@@ -227,7 +227,7 @@ namespace Visual {
 		End();
 	}
 
-	void UILayer::helpInfo() const 
+	void UILayer::helpInfo() const
 		/* Called by UILayer::render
 		 * Available by default when the application starts
 		*/
@@ -285,7 +285,7 @@ namespace Visual {
 		End();
 	}
 
-	void UILayer::carDebugInfo() const 
+	void UILayer::carDebugInfo() const
 		/* Called by UILayer::render
 		 * Available when the DebugCarModel's is rendered
 		*/
@@ -298,9 +298,9 @@ namespace Visual {
 		ImGui::End();
 	}
 
-	void UILayer::debug_physicsTelemetry() const 
+	void UILayer::debug_physicsTelemetry() const
 		/* Called by UILayer::carDebugInfo
-		 * Displays a child region within the debug window, that shows the core physical state of the Car 
+		 * Displays a child region within the debug window, that shows the core physical state of the Car
 		*/
 	{
 		using namespace ImGui;
@@ -335,7 +335,7 @@ namespace Visual {
 		EndChild();
 	}
 
-	void UILayer::debug_wheelTelemetry(unsigned char axlePos, unsigned char side, ImVec4 colour) const 
+	void UILayer::debug_wheelTelemetry(unsigned char axlePos, unsigned char side, ImVec4 colour) const
 		/* Called by UILayer::debug_allWheelTelemetry
 		 * Adds ImGui::Text to a window detailing some properties of one Wheel
 		*/
@@ -353,7 +353,7 @@ namespace Visual {
 		ImGui::PopStyleColor();
 	}
 
-	void UILayer::debug_allWheelTelemetry() const 
+	void UILayer::debug_allWheelTelemetry() const
 		/* Called by UILayer::carDebugInfo
 		 * Combines the text provided by 4 calls to debug_wheelTelemetry, into a 2 x 2 grid and displays this in a child region
 		*/
@@ -388,7 +388,7 @@ namespace Visual {
 		EndChild();
 	}
 
-	void UILayer::tyreParameters() const 
+	void UILayer::tyreParameters() const
 		/* Called by UILayer::render
 		 * Enables individual tyre parameter alteration
 		*/
@@ -451,7 +451,7 @@ namespace Visual {
 		End();
 	}
 
-	void UILayer::upsideDownWarning() const 
+	void UILayer::upsideDownWarning() const
 		/* Called by UILayer::render
 		 * If the user flips the Car over, this warning prompts them to reset it
 		*/
