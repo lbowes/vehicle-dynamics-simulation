@@ -13,4 +13,4 @@ This project counts for 20% of the final A level result. Details on the requirem
 
 ---
 
-![](VehiclePhysicsSim/screenshots/screenshot.png)
+![](screenshots/screenshot.png)
