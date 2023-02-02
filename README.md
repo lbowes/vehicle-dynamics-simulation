@@ -1,4 +1,7 @@
 # A-Level-Computer-Science-NEA
+
+![](screenshots/screenshot.png)
+
 Non-exam assessment project for AQA A level computer science, developed between September 2017 and April 2018.
 
 ### Aims
@@ -10,7 +13,3 @@ This project counts for 20% of the final A level result. Details on the requirem
 
 ### License
 [MIT License](https://github.com/lbowes/A-Level-Computer-Science-NEA/blob/master/LICENSE)
-
----
-
-![](screenshots/screenshot.png)
