@@ -1,4 +1,4 @@
-# A-Level-Computer-Science-NEA
+# vehicle-dynamics-simulation
 
 ![](screenshots/screenshot.png)
 
